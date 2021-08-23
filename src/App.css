@@ -1,38 +1,92 @@
-.App {
-  text-align: center;
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap');
+
+* {
+  padding: 0;
+  margin: 0;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+body {
+  font-family: Poppins;
+  background: #E5E5E5;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+
+
+
+/* sign-up  */
+.login-signup-page {
   display: flex;
-  flex-direction: column;
-  align-items: center;
   justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+  height: 100vh;
+  align-items: center;
 }
 
-.App-link {
-  color: #61dafb;
+.login-signup {
+  text-align: center;
+  padding-bottom: 30px;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.welcome {
+  font-weight: 600;
+  font-size: 26px;
+  line-height: 27px;
+  color: rgba(0, 0, 0, 0.7);
+  margin-bottom: 16px;
 }
+
+.login-signup p:nth-child(2) {
+  margin-bottom: 40px;
+}
+
+input {
+  width: 306px;
+  height: 32px;
+  background: #FFFFFF;
+  border-radius: 10px;
+  display: block;
+  margin-top: 20px;
+  padding: 5px 14px;
+  border: none;
+  outline: none;
+  font-size: 13px;
+  font-family: Poppins;
+  transition: ease-in-out box-shadow .2s;
+
+}
+
+input:hover, input:focus {
+  box-shadow: 0px 0px 0px 4px #c4e7e5
+}
+.btn {
+  font-family: Poppins;
+  width: 266px;
+  height: 38px;
+  background: #50C2C9;
+  border-radius: 4px;
+  border: none;
+  color: #fff;
+  margin-top: 40px;
+  cursor: pointer;
+}
+
+.login-signup p:last-child {
+  font-size: 14px;
+  margin-top: 20px;
+
+}
+
+a {
+  text-decoration: none;
+}
+
+.login-signup-link {
+  color: #24D0C6
+}
+
+
+
+
+
+
+/* login  */
