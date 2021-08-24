@@ -137,3 +137,11 @@ color: #5B5B5B;
   margin-right: 20px;
 }
 
+
+.error {
+  box-shadow: 0px 0px 0px 4px #eb6d7d
+}
+.error-text {
+  font-size: 12px;
+  color: #eb6d7d;
+}

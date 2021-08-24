@@ -9,6 +9,7 @@ import {
   Switch,
   Route
 } from "react-router-dom";
+import TodoApp from './pages/todo-app';
 
 function App() {
   return (
@@ -23,6 +24,9 @@ function App() {
           </Route>
           <Route path="/login">
             <Login />
+          </Route>
+          <Route path="/dashboard">
+            <TodoApp />
           </Route>
       </Switch>
     </Router>

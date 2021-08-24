@@ -1,8 +1,18 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import image from '../images/undraw.svg'
-import { Link } from 'react-router-dom'
+import { Link, useHistory } from 'react-router-dom'
+import { isLoggedIn } from "../utils"
 
 const Home = () => {
+    const history = useHistory()
+    useEffect(()=> {
+        if(isLoggedIn() === true) {
+            history.push("/dashboard")
+        }else {
+            history.push("/")
+        }
+
+    },[history])
     return (
         <div className="home-page">
             <div className="home-container">
