@@ -10,9 +10,6 @@ body {
   background: #f0f0f0;
 }
 
-
-
-
 .shape {
   position: absolute;
   top: 0;
@@ -62,9 +59,11 @@ input {
 
 }
 
-input:hover, input:focus {
+input:hover,
+input:focus {
   box-shadow: 0px 0px 0px 4px #c4e7e5
 }
+
 .btn {
   font-family: Poppins;
   width: 266px;
@@ -77,7 +76,8 @@ input:hover, input:focus {
   cursor: pointer;
   transition: ease-in-out background .2s;
 }
-.btn:hover{
+
+.btn:hover {
   background: #46a8ad;
 }
 
@@ -85,7 +85,6 @@ input:hover, input:focus {
 .login-signup p:last-child {
   font-size: 14px;
   margin-top: 20px;
-
 }
 
 a {
@@ -102,12 +101,13 @@ a {
 
 
 /* home page  */
-.home-page{
+.home-page {
   height: 100vh;
   display: flex;
   justify-content: center;
   align-items: center;
 }
+
 .home-container {
   display: grid;
   width: 80%;
@@ -117,21 +117,22 @@ a {
   grid-column-gap: 30px;
 }
 
-.home-img{
+.home-img {
   width: 100%;
 }
-.home-details{
+
+.home-details {
   margin-top: 15%;
   text-align: center;
 }
-.home-text{
+
+.home-text {
   font-size: 14px;
-line-height: 24px;
-margin-top: 20px;
-
-
-color: #5B5B5B;
+  line-height: 24px;
+  margin-top: 20px;
+  color: #5B5B5B;
 }
+
 .btn2 {
   width: 170px;
   margin-right: 20px;
@@ -141,7 +142,103 @@ color: #5B5B5B;
 .error {
   box-shadow: 0px 0px 0px 4px #eb6d7d
 }
+
 .error-text {
   font-size: 12px;
   color: #eb6d7d;
+}
+
+
+
+
+
+
+
+/* dashboard  */
+
+.name-img-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 200px;
+  background: #50C2C9;
+}
+
+.name-img {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+
+.name-img img {
+  width: 100px;
+}
+
+.name-img p {
+  font-weight: 600;
+  font-size: 22px;
+  line-height: 27px;
+  color: #FFFFFF;
+}
+
+.task-list {
+  width: 50%;
+  margin: 40px auto;
+}
+
+.list-heading {
+  font-size: 30px;
+  font-weight: 500;
+}
+
+.input-btn {
+  display: none;
+  align-items: center;
+  justify-content: space-between;
+  margin: 25px 0;
+}
+
+.btn-submit {
+  margin: 0;
+  width: 15%;
+}
+
+.task-input {
+  width: 80%;
+  height: 30px;
+  padding: 5px 10px;
+  margin: 0;
+}
+
+.list-container {
+  width: calc(100% - 60px);
+  background: #FFFFFF;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  border-radius: 21px;
+  height: 400px;
+  padding: 20px 30px;
+  margin-top: 25px;
+}
+
+.add-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.add-btn {
+  outline: none;
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+
+svg circle:hover {
+  fill: #46a8ad;
+}
+
+.show-input{
+  display: flex;
 }
