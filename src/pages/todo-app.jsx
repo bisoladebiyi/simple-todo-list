@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react'
-import { isLoggedIn } from "../utils"
+import { isLoggedIn, getCurrentUser, logOut } from "../utils"
 import { useHistory } from 'react-router-dom'
 import person from '../images/person.svg'
 
@@ -9,7 +9,7 @@ import person from '../images/person.svg'
 
 const TodoApp = () => {
     const history = useHistory()
-    
+
 
     useEffect(() => {
         if (isLoggedIn() === true) {
@@ -17,24 +17,31 @@ const TodoApp = () => {
         } else {
             history.push("/login")
         }
-
     }, [history])
-
 
     const showInput = () => {
         let input = document.getElementById("input")
         input.classList.add("show-input")
     }
+
     const addItem = () => {
         let input = document.getElementById("input")
         input.classList.remove("show-input")
     }
+
+    const onLogOut = () => {
+        logOut(()=> {
+            history.push('/login')
+        })
+    }
+
     return (
         <div>
             <div className="name-img-container">
                 <div className="name-img">
                     <img src={person} alt="" />
-                    <p>Hi *somename*</p>
+                    <p>Hi {getCurrentUser()?.firstname}</p>
+                    <button className="btn" onClick={onLogOut}>Log out</button>
                 </div>
             </div>
             <div className="task-list">
@@ -49,11 +56,11 @@ const TodoApp = () => {
                     <div className="add-item">
                         <p>Task List</p>
                         <button onClick={showInput} className="add-btn">
-                        <svg width="26" height="26" viewBox="0 0 26 26" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <circle cx="13" cy="13" r="13" fill="#50C2C9" />
-                            <rect x="6" y="12" width="14" height="2" fill="white" />
-                            <rect x="14" y="6" width="13" height="2" transform="rotate(90 14 6)" fill="white" />
-                        </svg>
+                            <svg width="26" height="26" viewBox="0 0 26 26" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <circle cx="13" cy="13" r="13" fill="#50C2C9" />
+                                <rect x="6" y="12" width="14" height="2" fill="white" />
+                                <rect x="14" y="6" width="13" height="2" transform="rotate(90 14 6)" fill="white" />
+                            </svg>
                         </button>
                     </div>
                 </div>
