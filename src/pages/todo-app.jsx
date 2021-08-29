@@ -1,14 +1,17 @@
-import React, { useEffect } from 'react'
-import { isLoggedIn, getCurrentUser, logOut } from "../utils"
+import React, { useEffect, useState } from 'react'
+import { isLoggedIn, getCurrentUser, logOut, fetch } from "../utils"
 import { useHistory } from 'react-router-dom'
 import person from '../images/person.svg'
 
 
+ const url = "https://bee-todo-app.herokuapp.com/todos"
 
-
-
+const accessToken = localStorage.getItem('accessToken')
 const TodoApp = () => {
     const history = useHistory()
+    const [ value, setValue ] = useState("")
+    const [ todo, setTodo ] = useState({ userId: getCurrentUser().id, description: value})
+
 
 
     useEffect(() => {
@@ -24,10 +27,29 @@ const TodoApp = () => {
         input.classList.add("show-input")
     }
 
+    const changeValue = (e) => {
+        setValue(e.target.value)
+    }
+
     const addItem = () => {
+        todo.description = value
+        const newDescription = todo.description
+       setTodo({...todo}, newDescription)
+       console.log(todo)
+        fetch(url, 'POST', todo, { 'Authorization': `Bearer ${accessToken}` })
+         .then((response)=> {
+            console.log(response)
+
+        }).catch((error) => {
+            console.log(error)
+        })
+
         let input = document.getElementById("input")
         input.classList.remove("show-input")
+        setValue("")
     }
+
+  
 
     const onLogOut = () => {
         logOut(()=> {
@@ -35,20 +57,22 @@ const TodoApp = () => {
         })
     }
 
+    
+
     return (
         <div>
             <div className="name-img-container">
                 <div className="name-img">
                     <img src={person} alt="" />
                     <p>Hi {getCurrentUser()?.firstname}</p>
-                    <button className="btn" onClick={onLogOut}>Log out</button>
+                    <button className="logout-btn" onClick={onLogOut}>Log out</button>
                 </div>
             </div>
             <div className="task-list">
 
                 <p className="list-heading">Task List</p>
                 <div className="input-btn" id="input">
-                    <input className="task-input" type="text" placeholder="Add task" />
+                    <input className="task-input" type="text" value={value} onChange={(e)=> changeValue(e)} placeholder="Add task" />
                     <button className="btn btn-submit" onClick={addItem}>Submit</button>
                 </div>
 
