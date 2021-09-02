@@ -37,9 +37,3 @@ export const logOut = (onLogoutComplete) => {
     localStorage.clear()
     onLogoutComplete()
 }
-
-export const getTasks = () => {
-    const tasks = localStorage.getItem("tasks")
-    const newTasks = JSON.parse(tasks)
-    return tasks === null ? [] : newTasks
-}
