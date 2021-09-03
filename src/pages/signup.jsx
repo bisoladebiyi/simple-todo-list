@@ -11,20 +11,19 @@ const Signup = () => {
     const [errorMessage, setErrorMessage] = useState("")
     let history = useHistory()
 
-
-
     useEffect(() => {
         if (isLoggedIn() === true) {
             history.push("/dashboard")
         }
     }, [history])
+
     const changeValue = (e) => {
         const newData = { ...signupInfo }
         newData[e.target.id] = e.target.value
         setSignupInfo(newData)
     }
-    const submitData = (e) => {
 
+    const submitData = (e) => {
         e.preventDefault()
         setIsLoading(true)
         fetch(url, 'POST', signupInfo)
@@ -33,8 +32,6 @@ const Signup = () => {
             }).catch((error) => {
                 setErrorMessage(error.response.data.errors[0].message)
             }).finally(()=> setIsLoading(false))
-
-
     }
 
     return (
