@@ -89,6 +89,19 @@ const TodoApp = () => {
     });
   };
 
+  const deleteTask = (id) => {
+    const deleteTaskEndpoint = `https://bee-todo-app.herokuapp.com/todos/${id}`;
+    fetch(deleteTaskEndpoint, "DELETE", null, {
+      Authorization: `Bearer ${accessToken}`
+    })
+      .then((response) => {
+        history.push("/")
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
+
   return (
     <div>
       <div className="name-img-container">
@@ -141,7 +154,7 @@ const TodoApp = () => {
             </button>
           </div>
 
-          {tasks.map(({ id, description } ) => <TaskItem key={id} description={description} id={id} />)}
+          {tasks.map(({ id, description } ) => <TaskItem key={id} description={description} id={id} deleteTask={deleteTask} />)}
           {hasMoreTasks() && (
             <button onClick={viewMoreTasks} className="btn load-more">
               Load More

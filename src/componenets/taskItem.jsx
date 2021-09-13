@@ -1,30 +1,10 @@
 import React from "react";
-import { useHistory } from "react-router-dom";
-import { fetch } from "../utils";
-
-const accessToken = localStorage.getItem("accessToken");
-
-const TaskItem = ({ description, id }) => {
-    const history = useHistory()
-  const deleteTask = () => {
-    const deleteTaskEndpoint = `https://bee-todo-app.herokuapp.com/todos/${id}`;
-
-    fetch(deleteTaskEndpoint, "DELETE", null, {
-      Authorization: `Bearer ${accessToken}`
-    })
-      .then((response) => {
-        history.push("/")
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-  };
-
+const TaskItem = ({ description, id, deleteTask}) => {
   return (
     <div className="task">
       <p>{description}</p>
       <div>
-        <button onClick={deleteTask}>
+        <button onClick={()=>deleteTask(id)}>
           <svg
             className="delete"
             stroke="currentColor"
