@@ -32,33 +32,38 @@ const TodoApp = () => {
       getCurrentUser()?.id
     }&$skip=${skip}`;
     fetch(fetchTasksEndpoint, "GET", null, {
-      Authorization: `Bearer ${accessToken}`,
+      Authorization: `Bearer ${accessToken}`
     })
       .then((response) => {
         setTasks(tasks.concat(response.data.data));
         setSkip(response.data.skip);
         setLimit(response.data.limit);
         setTotal(response.data.total);
+   
       })
       .catch((error) => {
         console.log(error);
       });
-  }, [skip, tasks]);
+  }, [skip]);
 
   const showInput = () => {
     setInputClass("show-input")
   };
 
+
   const changeValue = (e) => {
     setValue(e.target.value);
   };
 
-  const addItem = () => {
+  const addItem = (e) => {
+      e.preventDefault()
     todo.description = value;
     const newDescription = todo.description;
     setTodo({ ...todo }, newDescription);
     fetch(url, "POST", todo, { Authorization: `Bearer ${accessToken}` })
-      .then((response) => {})
+      .then((response) => {
+          history.push("/")
+      })
       .catch((error) => {
         console.log(error);
       });
@@ -84,6 +89,19 @@ const TodoApp = () => {
     });
   };
 
+  const deleteTask = (id) => {
+    const deleteTaskEndpoint = `https://bee-todo-app.herokuapp.com/todos/${id}`;
+    fetch(deleteTaskEndpoint, "DELETE", null, {
+      Authorization: `Bearer ${accessToken}`
+    })
+      .then((response) => {
+        history.push("/")
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
+
   return (
     <div>
       <div className="name-img-container">
@@ -97,18 +115,19 @@ const TodoApp = () => {
       </div>
       <div className="task-list">
         <p className="list-heading">Task List</p>
-        <div className={`input-btn ${inputClass}`} id="input">
-          <input
+            <form action="" className={`input-btn ${inputClass}`} id="input">
+            <input
             className="task-input"
             type="text"
             value={value}
             onChange={(e) => changeValue(e)}
             placeholder="Add task"
           />
-          <button className="btn btn-submit" onClick={addItem}>
+          <button className="btn btn-submit" type="submit" onClick={(e)=>addItem(e)}>
             Submit
           </button>
-        </div>
+            </form>
+          
 
         <div className="list-container">
           <div className="add-item">
@@ -135,7 +154,7 @@ const TodoApp = () => {
             </button>
           </div>
 
-          {tasks.map(({ id, description } ) => <TaskItem key={id} description={description} />)}
+          {tasks.map(({ id, description } ) => <TaskItem key={id} description={description} id={id} deleteTask={deleteTask} />)}
           {hasMoreTasks() && (
             <button onClick={viewMoreTasks} className="btn load-more">
               Load More
