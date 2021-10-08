@@ -6,10 +6,11 @@ import TaskItem from "../componenets/taskItem";
 
 const url = "https://bee-todo-app.herokuapp.com/todos";
 const accessToken = localStorage.getItem("accessToken");
+
 const TodoApp = () => {
   const history = useHistory();
   const [value, setValue] = useState("");
-  const [ inputClass, setInputClass ] = useState("")
+  const [inputClass, setInputClass] = useState("");
   const [todo, setTodo] = useState({
     userId: getCurrentUser().id,
     description: value,
@@ -32,14 +33,13 @@ const TodoApp = () => {
       getCurrentUser()?.id
     }&$skip=${skip}`;
     fetch(fetchTasksEndpoint, "GET", null, {
-      Authorization: `Bearer ${accessToken}`
+      Authorization: `Bearer ${accessToken}`,
     })
       .then((response) => {
         setTasks(tasks.concat(response.data.data));
         setSkip(response.data.skip);
         setLimit(response.data.limit);
         setTotal(response.data.total);
-   
       })
       .catch((error) => {
         console.log(error);
@@ -47,27 +47,26 @@ const TodoApp = () => {
   }, [skip]);
 
   const showInput = () => {
-    setInputClass("show-input")
+    setInputClass("show-input");
   };
-
 
   const changeValue = (e) => {
     setValue(e.target.value);
   };
 
   const addItem = (e) => {
-      e.preventDefault()
+    e.preventDefault();
     todo.description = value;
     const newDescription = todo.description;
     setTodo({ ...todo }, newDescription);
     fetch(url, "POST", todo, { Authorization: `Bearer ${accessToken}` })
       .then((response) => {
-          history.push("/")
+        history.push("/");
       })
       .catch((error) => {
         console.log(error);
       });
-      setInputClass("")
+    setInputClass("");
     setValue("");
   };
 
@@ -89,13 +88,27 @@ const TodoApp = () => {
     });
   };
 
+  const editTask = (id, editInfo) => {
+    const editTaskEndpoint = `https://bee-todo-app.herokuapp.com/todos/${id}`;
+    fetch(editTaskEndpoint, "PATCH", editInfo, {
+      Authorization: `Bearer ${accessToken}`,
+    })
+      .then((response) => {
+        console.log(response)
+        history.push("/");
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
+
   const deleteTask = (id) => {
     const deleteTaskEndpoint = `https://bee-todo-app.herokuapp.com/todos/${id}`;
     fetch(deleteTaskEndpoint, "DELETE", null, {
-      Authorization: `Bearer ${accessToken}`
+      Authorization: `Bearer ${accessToken}`,
     })
       .then((response) => {
-        history.push("/")
+        history.push("/");
       })
       .catch((error) => {
         console.log(error);
@@ -115,19 +128,22 @@ const TodoApp = () => {
       </div>
       <div className="task-list">
         <p className="list-heading">Task List</p>
-            <form action="" className={`input-btn ${inputClass}`} id="input">
-            <input
+        <form action="" className={`input-btn ${inputClass}`} id="input">
+          <input
             className="task-input"
             type="text"
             value={value}
             onChange={(e) => changeValue(e)}
             placeholder="Add task"
           />
-          <button className="btn btn-submit" type="submit" onClick={(e)=>addItem(e)}>
-            Submit
+          <button
+            className="btn btn-submit"
+            type="submit"
+            onClick={(e) => addItem(e)}
+          >
+            Add
           </button>
-            </form>
-          
+        </form>
 
         <div className="list-container">
           <div className="add-item">
@@ -154,7 +170,16 @@ const TodoApp = () => {
             </button>
           </div>
 
-          {tasks.map(({ id, description } ) => <TaskItem key={id} description={description} id={id} deleteTask={deleteTask} />)}
+          {tasks.map(({ id, description }) => {
+            return(
+            <TaskItem
+              key={id}
+              description={description}
+              id={id}
+              deleteTask={deleteTask}
+              editTask={editTask}
+            />
+          )})}
           {hasMoreTasks() && (
             <button onClick={viewMoreTasks} className="btn load-more">
               Load More
