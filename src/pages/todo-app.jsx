@@ -87,14 +87,13 @@ const TodoApp = () => {
       history.push("/login");
     });
   };
-
+  
   const editTask = (id, editInfo) => {
     const editTaskEndpoint = `https://bee-todo-app.herokuapp.com/todos/${id}`;
     fetch(editTaskEndpoint, "PATCH", editInfo, {
       Authorization: `Bearer ${accessToken}`,
     })
       .then((response) => {
-        console.log(response)
         history.push("/");
       })
       .catch((error) => {
@@ -114,7 +113,6 @@ const TodoApp = () => {
         console.log(error);
       });
   };
-
   return (
     <div>
       <div className="name-img-container">
@@ -140,6 +138,7 @@ const TodoApp = () => {
             className="btn btn-submit"
             type="submit"
             onClick={(e) => addItem(e)}
+            disabled = {value ? false : true}
           >
             Add
           </button>

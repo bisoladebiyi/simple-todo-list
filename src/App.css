@@ -38,7 +38,7 @@ body {
   margin-bottom: 16px;
 }
 
-.login-signup p:nth-child(2) {
+.login-signup .meet-task-text {
   margin-bottom: 40px;
 }
 
@@ -80,7 +80,7 @@ input:focus {
   background: #46a8ad;
 }
 
-.login-signup p:last-child {
+.existing-account {
   font-size: 14px;
   margin-top: 20px;
 }
@@ -286,4 +286,27 @@ button {
   height: auto;
   width: 70%;
   border-radius: 3px;
+}
+
+
+button:disabled{
+  background: rgb(194, 191, 191);
+  cursor: not-allowed;
+}
+button:hover:disabled{
+  background: rgb(172, 170, 170);
+}
+.no-match{
+  display: flex;
+  align-items: center;
+  margin-top: 10px;
+  justify-content: center;
+}
+.no-match .no-match-text{
+  font-size: 13px;
+  color: #eb6d7d;
+  margin-left: 5px;
+}
+.warning{
+  width: 13px;
 }
