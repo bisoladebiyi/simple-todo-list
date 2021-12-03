@@ -3,6 +3,7 @@ import { isLoggedIn, getCurrentUser, logOut, fetch } from "../utils";
 import { useHistory } from "react-router-dom";
 import person from "../images/person.svg";
 import TaskItem from "../componenets/taskItem";
+import search from "../images/search.svg"
 
 const url = "https://bee-todo-app.herokuapp.com/todos";
 const accessToken = localStorage.getItem("accessToken");
@@ -11,6 +12,7 @@ const TodoApp = () => {
   const history = useHistory();
   const [value, setValue] = useState("");
   const [inputClass, setInputClass] = useState("");
+  const [searchValue, setSearchValue] = useState("");
   const [todo, setTodo] = useState({
     userId: getCurrentUser().id,
     description: value,
@@ -113,6 +115,10 @@ const TodoApp = () => {
         console.log(error);
       });
   };
+  const searchItem = (e) => {
+    setSearchValue(e.target.value)
+  }
+
   return (
     <div>
       <div className="name-img-container">
@@ -123,9 +129,19 @@ const TodoApp = () => {
             Log out
           </button>
         </div>
+        <form className="search-form" action="">
+        <input className="search-input" type="text" placeholder="Search" onChange={(e)=> searchItem(e)} />
+        <img className="search-icon" src={search} alt="" />
+        </form>
+        
+          
+    
       </div>
       <div className="task-list">
         <p className="list-heading">Task List</p>
+      
+
+       
         <form action="" className={`input-btn ${inputClass}`} id="input">
           <input
             className="task-input"
@@ -169,7 +185,15 @@ const TodoApp = () => {
             </button>
           </div>
 
-          {tasks.map(({ id, description }) => {
+          {
+          tasks.filter((task)=> {
+            if(searchValue === ""){
+              return task
+            }else if(task.description.toLowerCase().includes(searchValue.toLowerCase())) {
+              return task
+            }
+          }).map(({ id, description }) => {
+            
             return(
             <TaskItem
               key={id}
@@ -178,7 +202,9 @@ const TodoApp = () => {
               deleteTask={deleteTask}
               editTask={editTask}
             />
-          )})}
+          )
+          })
+          }
           {hasMoreTasks() && (
             <button onClick={viewMoreTasks} className="btn load-more">
               Load More
