@@ -49,7 +49,7 @@ const Login = () => {
                     <input type="password" id="password" value={loginInfo.password} onChange={(e) => changeValue(e)} placeholder="Password" />
                     <button className="btn" onClick={(e) => submitData(e)}>{isLoading ? "Loading..." : "Sign In"}</button>
                 </form>
-                <p>Don't have an account ? <Link to="/signup" className="login-signup-link">Sign Up</Link></p>
+                <p className="existing-account">Don't have an account ? <Link to="/signup" className="login-signup-link">Sign Up</Link></p>
             </div>
         </div>
     )

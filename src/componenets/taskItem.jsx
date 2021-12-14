@@ -1,7 +1,7 @@
 import React from "react";
 import { useState } from "react/cjs/react.development";
 
-const TaskItem = ({ description, id, deleteTask, editTask}) => {
+const TaskItem = ({ description, id, deleteTask, editTask, searchValue}) => {
   const [edit, setEdit] = useState(false);
   const [value, setValue] = useState(description)
   const [editInfo, setEditInfo] = useState({ description: value})
