@@ -209,6 +209,7 @@ a {
 .list-heading {
   font-size: 30px;
   font-weight: 500;
+  margin-left: 20px;
 }
 
 .input-btn {
@@ -292,7 +293,7 @@ button {
   margin-top: 0;
   width: 20%;
   height: auto;
-  padding: 5px 30px;
+  padding: 5px 0px;
 }
 .edit-task{
   padding: 5px 28px;
@@ -329,4 +330,91 @@ button:hover:disabled{
 }
 .warning{
   width: 13px;
+}
+
+
+
+@media (max-width: 900px) and (min-width: 800px) {
+  .home-container {
+    width: 90%;
+  }
+  .home-img {
+    width: 80%;
+  }
+  .home-details {
+    margin-top: 20%;
+    text-align: center;
+  }
+  .search-form{
+    width: 40%;
+
+  }
+  .task-list {
+    width: 60%;
+    margin: 40px auto;
+  }
+}
+@media (max-width: 800px) and (min-width: 500px) {
+  .search-form{
+    width: 45%;
+
+  }
+  .task-list {
+    width: 80%;
+    margin: 40px auto;
+  }
+  .task {
+    padding: 5px 15px;
+  }
+}
+@media (max-width: 500px) and (min-width: 270px) {
+  .search-form{
+    width: 70%;
+
+  }
+  .task-list {
+    width: 100%;
+    margin: 40px auto;
+  }
+  .list-container {
+    padding: 20px 20px;
+    margin: 25px auto;
+  
+  }
+  .task {
+    padding: 5px 5px;
+    font-size: 11px;
+  }
+  .edit-task {
+  padding: 5px 0px;
+  }
+
+
+}
+
+
+@media (max-width: 800px) and (min-width: 0px){
+  .home-container {
+    display: block;
+  }
+  .home-img{
+    display: none;
+  }
+  .btn2 {
+    width: 120px;
+    margin-right: 20px;
+  }
+}
+
+@media (max-width: 450px) and (min-width: 0px){
+  .welcome {
+    font-weight: 600;
+    font-size: 23px;
+    margin-bottom: 10px;
+  }
+  input {
+    width: 240px;
+    height: 28px;
+    font-size: 11px;
+  }
 }
