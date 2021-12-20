@@ -4,12 +4,14 @@ import { useHistory } from "react-router-dom";
 import person from "../images/person.svg";
 import TaskItem from "../componenets/taskItem";
 import search from "../images/search.svg"
+import LoadingState from "../componenets/loadingState";
 
 const url = "https://bee-todo-app.herokuapp.com/todos";
 const accessToken = localStorage.getItem("accessToken");
 
 const TodoApp = () => {
   const history = useHistory();
+  const [ isLoading, setIsLoading ] =useState(false)
   const [value, setValue] = useState("");
   const [inputClass, setInputClass] = useState("");
   const [searchValue, setSearchValue] = useState("");
@@ -31,6 +33,7 @@ const TodoApp = () => {
   }, [history]);
 
   useEffect(() => {
+    setIsLoading(true)
     const fetchTasksEndpoint = `https://bee-todo-app.herokuapp.com/todos?userId=${
       getCurrentUser()?.id
     }&$skip=${skip}`;
@@ -42,6 +45,7 @@ const TodoApp = () => {
         setSkip(response.data.skip);
         setLimit(response.data.limit);
         setTotal(response.data.total);
+        setIsLoading(false)
       })
       .catch((error) => {
         console.log(error);
@@ -120,7 +124,8 @@ const TodoApp = () => {
   }
 
   return (
-    <div>
+    <div className="Container">
+    {isLoading? <LoadingState /> : <div className="dashboard">
       <div className="name-img-container">
         <div className="name-img">
           <img src={person} alt="" />
@@ -212,7 +217,9 @@ const TodoApp = () => {
           )}
         </div>
       </div>
+    </div> }
     </div>
+    
   );
 };
 
