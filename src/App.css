@@ -58,7 +58,7 @@ input {
   padding: 5px 14px;
   border: none;
   outline: none;
-  font-size: 13px;
+  font-size: 14px !important;
   font-family: Poppins;
   box-shadow: 0px 0px 0px 1px #e0e0e0;
   transition: ease-in-out box-shadow 0.2s;
@@ -375,7 +375,7 @@ button:hover:disabled{
     padding: 5px 15px;
   }
 }
-@media (max-width: 500px) and (min-width: 270px) {
+@media (max-width: 500px) and (min-width: 0px) {
   .search-form{
     width: 70%;
 
@@ -429,6 +429,17 @@ button:hover:disabled{
     font-size: 11px;
     margin-top: 10px;
   }
+.input-btn{
+  width: 90%;
+  margin: 10px auto;
+}
+.task-input{
+  width: 78%;
+}
+.btn-submit{
+  width: 12%;
+  font-size: 12px;
+}
 }
 
 
