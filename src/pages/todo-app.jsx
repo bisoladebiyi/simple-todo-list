@@ -45,11 +45,10 @@ const TodoApp = () => {
         setSkip(response.data.skip);
         setLimit(response.data.limit);
         setTotal(response.data.total);
-        setIsLoading(false)
       })
       .catch((error) => {
         console.log(error);
-      });
+      }).finally(()=> setIsLoading(false));
   }, [skip]);
 
   const showInput = () => {
